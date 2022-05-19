@@ -129,7 +129,7 @@ namespace jsk_footstep_controller
     odom_init_pose_ = Eigen::Affine3d::Identity();
     odom_init_trigger_sub_ = pnh.subscribe("/odom_init_trigger", 1,
                                            &Footcoords::odomInitTriggerCallback, this);
-    periodic_update_timer_ = pnh.createTimer(ros::Duration(1.0 / 25),
+    periodic_update_timer_ = pnh.createTimer(ros::Duration(1.0 / 50),
                                              boost::bind(&Footcoords::periodicTimerCallback, this, _1));
     sub_lfoot_force_.subscribe(nh, "lfsensor", 50);
     sub_rfoot_force_.subscribe(nh, "rfsensor", 50);
@@ -1013,8 +1013,8 @@ namespace jsk_footstep_controller
     if (publish_odom_tf_) {
       tf_transforms.push_back(ros_odom_to_body_coords);
     }
-    tf_transforms.push_back(ros_body_on_odom_coords);
-    tf_transforms.push_back(ros_odom_init_coords);
+    //tf_transforms.push_back(ros_body_on_odom_coords);
+    //tf_transforms.push_back(ros_odom_init_coords);
     tf_broadcaster_.sendTransform(tf_transforms);
   }
 
